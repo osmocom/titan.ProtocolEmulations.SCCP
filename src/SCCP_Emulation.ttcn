@@ -27,6 +27,7 @@ modulepar
   float   tsp_max_ConnectionId  := 16777216.0;  //max connection id = 0..tsp_max_ConnectionId -1
   integer tsp_force_xudt := 0;
   integer tsp_SIF_MaxLength := 272
+  boolean tsp_override_called_address := true // if true and v_remote_SPC is exists, the CalledAddress is set route on SSN to v_remote_SPC
 }
 
 import from General_Types all;
@@ -5431,7 +5432,7 @@ group SCCPFunctions
       var SCCP_PAR_Address vl_SCCP_PAR_Address;
       vl_SCCP_PAR_Address := pl_N_UNITDATA_req.calledAddress;
 
-      if ( v_remote_SPC > 0)
+      if ( tsp_override_called_address and (v_remote_SPC > 0) )
       {
         vl_SCCP_PAR_Address.addressIndicator.pointCodeIndic :='1'B; // 3.4.1/Q713.
         vl_SCCP_PAR_Address.addressIndicator.routingIndicator := cg_route_on_SSN;

@@ -1,0 +1,13 @@
+= SCCP Protocol Emulation for TTCN-3 Toolset with TITAN,, Change log
+:author: Gábor Szalai
+:toc: left
+
+== Changes
+
+=== R8A
+
+The CalledAddress is not overrrided any more.
+
+=== R8B
+
+New tsp is introduced to controll the override of CalledAddress

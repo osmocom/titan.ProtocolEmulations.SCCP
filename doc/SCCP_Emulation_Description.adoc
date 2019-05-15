@@ -1,24 +1,8 @@
----
-Author: János Kövesdi
-Version: 1551-CNL 113 341, Rev. A
-Date: 2013-03-13
-
----
 = SCCP Protocol Emulation for TTCN-3 Toolset with TITAN, Description
 :author: János Kövesdi
-:revnumber: 1551-CNL 113 341, Rev. A
-:revdate: 2013-03-13
-:toc:
+:toc: left
 
-== How to Read This Document
-
-This document is for the SCCP Protocol Emulation (SCCP PE). The SCCP PE is developed for the TTCN-3 Toolset with TITAN according to the Requirement Specification <<_4, [4]>>.
-
-== Presumed Knowledge
-
-The knowledge of the TITAN TTCN-3 Test Executor <<_3, [3]>> and the TTCN-3 language <<_1, [1]>> is essential.
-
-= Functionality
+== Functionality
 
 "The Signaling Connection Control Part (SCCP) provides additional functions to the Message Transfer Part (MTP) to cater for both connectionless as well as connection-oriented services to transfer … signaling information" <<_6, [6]>>.
 
@@ -33,7 +17,7 @@ image::images/functionality_SS7_service_primitives.png[alt]
 
 The SCCP (and therefore SCCP PE itself) is situated between the `MTP3` and the SCCP-User. SCCP communicates with them via service primitives.
 
-== Implemented Protocols
+=== Implemented Protocols
 
 The SCCP protocol uses the `MTP` for basic routing and error detection.
 
@@ -57,25 +41,25 @@ The `ITU-T` recommendations for the Message Transfer Part are:
 
 The SCCP application can operate directly over the SCCP User Adaption protocol (SUA).
 
-== Supported Standards
+=== Supported Standards
 
 SCCP PE implements SCCP specification of `ITU`, `ANSI`, `MPT` and `TTC` in one module.
 
 Several component instances of the SCCP PE behavior can be used in a TTCN-3 test configuration. Each of the test component instances can behave according to one of the above versions of SCCP (`ITU` or `ANSI` or `MPT` or `TTC`).
 
-== Modified and Non-Implemented Protocol Elements
+=== Modified and Non-Implemented Protocol Elements
 
 For detailed information see section <<feature-list,Feature List>>. In section <<capacity_and_limitation, Capacity and Limitation>>, you can find a summary of capacity and limitations (including the not implemented parts).
 
-=== Missing Primitives
+==== Missing Primitives
 
 The following primitives are not implemented: `LUDT`, `LUDTS, MTP3-PAUSE`,`MTP3-RESUME` and `MTP3-STATUS` (sections <<capacity_and_limitation, Capacity and Limitation>> and <<differences_between_ITU_ANSI_MPT_and_TC,  Differences between ITU, ANSI, MPT and TTC>>).
 
-=== Routing Functionality and Global Title Translation Omitted
+==== Routing Functionality and Global Title Translation Omitted
 
 Routing functionality is not implemented: SCCP PE emulates a signaling endpoint. Accordingly, Global Title Translation is not implemented either. (Sections <<global_title_translation, Global Title Translation>> and <<capacity_and_limitation, Capacity and Limitation>>)
 
-=== Management Messages Are Only Partially Implemented
+==== Management Messages Are Only Partially Implemented
 
 The following management messages are not implemented:
 
@@ -85,19 +69,19 @@ The following management messages are not implemented:
 
 For further details see section <<SCCP_management_functionality, SCCP Management Functionality>>.
 
-=== Flow Control Not Supported
+==== Flow Control Not Supported
 
 Not implemented by SCCP PE as Service Class 3 is not supported.
 
-== Ericsson-Specific Changes
+=== Ericsson-Specific Changes
 
 Change Request `MTTSM00016068` was implemented to support `MPT` (China) version.
 
-== Backward Incompatibilities
+=== Backward Incompatibilities
 
 None.
 
-== System Requirements
+=== System Requirements
 
 In order to operate the SCCP PE the following system requirements must be satisfied:
 
@@ -106,9 +90,9 @@ In order to operate the SCCP PE the following system requirements must be satisf
 NOTE: This version of the protocol module is not compatible with TITAN releases earlier than R7B.
 
 [[feature-list]]
-= Feature List
+== Feature List
 
-== Service Classes
+=== Service Classes
 
 Service primitives are implemented as messages in the test ports.
 
@@ -126,7 +110,7 @@ The SCCP PE supports classes 0,1,2 but does not support class 3.
 
 There is no difference between class 0 and 1 because only one test port used by `MTP`.
 
-== MTP3 Service Primitives
+=== MTP3 Service Primitives
 
 `MTP3` Abstract Service Primitives are received and sent by SCCP across service access points (see <<functionality_SS7_service_primitives, figure>>) and can be found in the <<MTP3_primitives_handled_by_SCCP_PE, table>> below.
 
@@ -164,7 +148,7 @@ SLS |4 |8 |4 |4 |
 
 **:MPT international is the same as ITU-T
 
-== SCCP Messages
+=== SCCP Messages
 
 User data fields of MTP3 primitives received by SCCP from MTP3 (or from M3UA) are mapped to N-service primitives that will be sent to the SCCP User(s).
 
@@ -201,7 +185,7 @@ XUDTSExtended Unitdata Service |X |X | |00010010 |N-UNITDATA indication | |
 
 This table describes what kind of messages SCCP PE accepts from MTP3 and how they are translated. The translation rule is more complicated than it is described in <<message_types_implemented_by_SCCP_PE, table>> above. Details can be found in Q.714.
 
-== SCCP Primitives of the Connectionless Service
+=== SCCP Primitives of the Connectionless Service
 
 SCCP can provide 2 classes of connectionless services (0 and 1) but there is no difference between them in this implementation (see 6/Q.711 and 2/T1.112.1-2001).
 
@@ -228,7 +212,7 @@ User Data
 Importance |N_NOTICE_ind |From UDTS
 |==============================================
 
-== SCCP Primitives for Connection-Oriented Services
+=== SCCP Primitives for Connection-Oriented Services
 
 [cols=",,,,",options="header"]
 |===
@@ -257,7 +241,7 @@ Connection identification | |Released (RLSD) OR Connection refusal (CREF) see Q.
 |===
 
 [[SCCP_management_functionality]]
-== SCCP Management Functionality
+=== SCCP Management Functionality
 
 There is no interworking between MTP3/M3UA and SCCP management.
 
@@ -286,29 +270,29 @@ The SCCP management is restricted to the following:
 |`SSA` |`SSA`
 |======================
 
-== Inactivity Control
+=== Inactivity Control
 
 It is implemented.
 
-== Message Sequence Control
+=== Message Sequence Control
 
 SCCP PE maintains the order of messages between of upper and lower layer interfaces.
 
-== Segmentation and Reassembly
+=== Segmentation and Reassembly
 
 It is a feature in service class 0 and 1. SCCP PE supports it.
 
-== State Machine
+=== State Machine
 
 SCCP PE maintains a state machine behavior for each connection-oriented services according to Figure 8/Q.711.
 
 [[global_title_translation]]
-== Global Title Translation
+=== Global Title Translation
 
 Not supported.
 
 [[capacity_and_limitation]]
-== Capacity and Limitation
+=== Capacity and Limitation
 
 See features with restriction in SCCP PE in the following table:
 
@@ -332,7 +316,7 @@ See features with restriction in SCCP PE in the following table:
 There shall be exactly one SCCP User test component instance for each SCCP PE instance. An SCCP PE instance is able to handle up to 16 SCCP connections and 16 segmented `N-UNITDATA` messages at the same time.
 
 [[differences_between_ITU_ANSI_MPT_and_TC]]
-== Differences Between ITU, ANSI, MPT and TTC
+=== Differences Between ITU, ANSI, MPT and TTC
 
 1.  Address length (see <<size_of_fields_in_different_specifications, table>> above).
 2.  TTC doesn’t support connection-oriented services and management functionality.
@@ -344,7 +328,7 @@ There shall be exactly one SCCP User test component instance for each SCCP PE in
 8.  ANSI doesn’t support optional field ``importance''.
 9.  TTC doesn’t support LUDT, LUDTS
 
-= Test Port Usage
+== Test Port Usage
 
 The SCCP PE is developed for testing implementations of SCCP Users using TTCN-3 and it uses the services of underlying level MTP3. It is considered that the SCCP layer of the peer conforms to the same specifications as SCCP PE does.
 
@@ -352,13 +336,13 @@ See service primitives in SS7 below:
 
 image::images/test_port_usage_SS7_service_primitives.png[alt]
 
-== The User Interface: the N-Service Primitives
+=== The User Interface: the N-Service Primitives
 
 SCCP PE communicates with its user by means of N-Service primitives.
 
 These primitives are implemented as TTCN-3 records. Any SCCP User inserts its message in the field `User Data`. Their implementation can be found in file __SCCPasp_Types.ttcn__.
 
-=== SCCP Primitives of Connectionless Service
+==== SCCP Primitives of Connectionless Service
 
 SCCP PE can receive `N_UNITDATA_req` messages and can send `N_UNITDATA_ind` and `N_NOTICE_ind` in case of connectionless communication. Their implementation is the following (for details see the file __SCCPasp_Types.ttcn__ itself):
 
@@ -394,7 +378,7 @@ type record N_NOTICE_ind
 }
 ----
 
-=== SCCP Primitives of Connection Oriented Service
+==== SCCP Primitives of Connection Oriented Service
 
 SCCP PE can receive `N_CONNECT_req`, `N_CONNECT_res`, `N_DATA_req` and `N_DISCONNECT_req` and send them as `N_CONNECT_ind`, `N_CONNECT_cfm`,`N_DATA_ind` and `N_DISCONNECT_ind`, respectively.
 
@@ -477,7 +461,7 @@ type record N_DISCONNECT_ind
 }
 ----
 
-== The MTP3-Service Primitives
+=== The MTP3-Service Primitives
 
 For implementation details see file __MTP3asp_Types.ttcn__ of product CNL 113 337. Here only the implementation of the two MTP-TRANSFER primitives are listed:
 
@@ -510,7 +494,7 @@ octetstring       data
 ----
 
 [[choosing-between-protocol-standards-resp-versions]]
-=== Choosing Between Protocol Standards Resp. Versions
+==== Choosing Between Protocol Standards Resp. Versions
 
 The service type or "flavor" of the SCCP PE defines which specification should be followed.
 
@@ -518,17 +502,17 @@ These types are: MTP3 ITU, MTP3b ITU, MTP3 ANSI, MTP3 MPT, MTP3 TCC (Japanese)
 
 NOTE: M3UA is not an option. M3UA is not a standalone service type because if M3UA serves on level 3 instead of MTP3 it can receive and send messages of any length according to any required upper specification mentioned above.
 
-=== Forced Sending of XUDT Messages
+==== Forced Sending of XUDT Messages
 
 SCCP transfers the received information from `N_UNITDATA_req` in udt messages or in xudt messages (if the User data is long). The mapping into xudt can be forced.
 
-== Installation
+=== Installation
 
 Since the SCCP PE is used as a part of the TTCN-3 test environment this requires TTCN-3 Test Executor to be installed before any operation of the SCCP PE. For more details on the installation of TTCN-3 Test Executor see the relevant section of <<_2, [2]>>.
 
 An implementation of the MTP3 protocol or an MTP3 test port is also assumed.
 
-=== Description of Files Implementing the SCCP PE
+==== Description of Files Implementing the SCCP PE
 
 The SCCP PE consists of the following files:
 
@@ -555,11 +539,11 @@ __SCCP_Emulation.ttcn__
 
 This file contains PDU templates and the dynamical part.
 
-== Configuration
+=== Configuration
 
 The SCCP protocol behavior can be influenced in two ways. The first one is to set module parameters in the configuration file. The second one is to set the arguments of the function `"SCCPStart"`
 
-=== SCCP PE Parameters in the Protocol Emulation Configuration File
+==== SCCP PE Parameters in the Protocol Emulation Configuration File
 
 Some properties of the SCCP PE can be set in the `[MODULE_PARAMETERS]` section of the configuration file. These are the following:
 
@@ -616,7 +600,20 @@ Default value: `_272 (MTP3)_`
 +
 OPTIONAL
 
-=== Arguments of Function `SCCPStart`
+* `SCCP.tsp_override_called_address:`
++
+Type: boolean
++
+Meaning: If set to true the CalledAddress is overridden to route on SSN
++
+Possible values: `true false` 
++
+Default value: `true`
++
+OPTIONAL
+
+
+==== Arguments of Function `SCCPStart`
 
 `SCCPStart` is the function containing the behavior of the SCCP test component. It should receive some initial parameters in the argument `pl_Boot` with type `MSC_SCCP_MTP3_parameters`. This way is introduced to give the possibility to apply more than one SS7 protocol stack in the same test suite.
 
@@ -661,7 +658,7 @@ Definition of the fields:
 
 `ssn`:: Subsystem Number. It identifies the SCCP User, see 3.4.2.2/[9]. If it is set, then the subsystem test message will be approved only for this subsystem. If it is omitted, then every subsystem test message will be approved.
 
-== _Makefile_
+=== _Makefile_
 
 If the lower (dual faced) port is connected to an MTP3 distributor component, then flag for TTCN-3 files should be set on the following way:
 
@@ -669,15 +666,15 @@ If the lower (dual faced) port is connected to an MTP3 distributor component, th
 
 If this flag is set, then the lower port will be an external port otherwise it will be an internal port.
 
-= Error Messages
+== Error Messages
 
 None.
 
-= Warning Messages
+== Warning Messages
 
 None.
 
-= Examples
+== Examples
 
 Two examples are attached here.
 
@@ -685,7 +682,7 @@ The first one demonstrates how to make a so called "self test" without real SUT.
 
 The second one is a very simple test where the MTP3 level is implemented as a test port and the SUT is implemented by SEA.
 
-== Example 1
+=== Example 1
 
 This example demonstrates how to make a self test.
 
@@ -699,7 +696,7 @@ The scheme is the following:
 
 image:images/example_1_scheme.png[alt]
 
-=== Configuration file 1
+==== Configuration file 1
 
 [source]
 ----
@@ -757,7 +754,7 @@ tsp_SIF_MaxLength := 272
 tsp_force_xudt := 1 // 1:yes, 0:no
 ----
 
-=== Test Suite 1
+==== Test Suite 1
 
 [source]
 ----
@@ -1345,7 +1342,7 @@ control
 }//module
 ----
 
-== Example 2
+=== Example 2
 
 Example 2 implements a real test situation. The TTCN-3 test suite interacts with a SEA which contains a simulated SS7 signaling node. The test suite sends a message and waits for answer until timeout.
 
@@ -1354,7 +1351,7 @@ The scheme is the following:
 image::images/example_2_scheme.png[alt]
 
 
-=== Configuration file 2
+==== Configuration file 2
 
 [source]
 ----
@@ -1411,7 +1408,7 @@ tsp_sccp_serviceType := "mtp3_ttc"
 tsp_SIF_MaxLength := 272
 tsp_force_xudt := 0 // 1:yes, 0:no
 ----
-=== Test Suite 2
+==== Test Suite 2
 
 [source]
 ----
@@ -1857,7 +1854,7 @@ control
 }//module
 ----
 
-= Terminology
+== Terminology
 
 *Protocol Emulation:* +
 An instance which implements messages and dynamic behavior of a given protocol layer.
@@ -1868,7 +1865,7 @@ Implementation of SCCP as specified in <<_6, [6]>>.
 *SCCP User:* +
 Protocol, which uses services of SCCP.
 
-== Abbreviations
+=== Abbreviations
 
 ANSI:: American National Standards Institute
 
@@ -1916,7 +1913,7 @@ TTCN-3:: Testing and Test Control Notation version 3.
 
 TTC:: Telecommunications Technology Committee (Standardization body of Japan)
 
-= References
+== References
 
 [[_1]]
 [1] ETSI ES 201 873-1 V3.2.1 (2007-02) +
