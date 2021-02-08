@@ -761,42 +761,34 @@ group ParameterDefinitions
   //---------------------------------------------------------------------------
   // Affected SSN (Q713 $5.2.1)
   //---------------------------------------------------------------------------
-  /* not supported yet:
   type SCCP_field_SubsystemNumber SCMG_param_AffectedSSN
   with { variant "" }
-  */
 
   //---------------------------------------------------------------------------
   // Affected Pointcode (Q713 $5.2.2)
   //---------------------------------------------------------------------------
-  /* not supported yet:
-  type SCCP_field_SignallingPointCode SCMG_param_AffectedPointCode
+  type SCCP_field_SignallingPointCode_itu SCMG_param_AffectedPointCode
   with { variant "" }
-  */
 
   //---------------------------------------------------------------------------
   // Subsystem Multiplicity Indicator (Q713 $5.2.3)
   //---------------------------------------------------------------------------
-  /* not supported yet:
   type record SCMG_param_MultiplIndicator
   {
     BIT2          smi,
     BIT6          reserved
   }
   with { variant "" }
-  */
 
   //---------------------------------------------------------------------------
   // SCCP congestion level (Q713 $5.2.4)
   //---------------------------------------------------------------------------
-  /* not supported yet:
   type record SCMG_param_CongestionLevel
   {
     BIT4          congLevel,
     BIT4          reserved
   }
   with { variant "" }
-  */
 
 }//endgroup ParameterDefinitions
 
@@ -1291,7 +1283,7 @@ group PDUDefinitions
   //********************************************************************************
   // SCCP management messages (Q713 $5.3)
   //********************************************************************************
-  /*type record  PDU_SCMG_message
+  type record  PDU_SCMG_message
   {
    SCMG_param_FormatId                  messageType,
    SCMG_param_AffectedSSN               affectedSSN,
@@ -1301,7 +1293,6 @@ group PDUDefinitions
       //shall be present in all messages except SSG
   }
    with { variant "" }
-  */
 
   //********************************************************************************
   // SCCP Top Level PDU (Q713 $4.2)
