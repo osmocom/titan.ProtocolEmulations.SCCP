@@ -2425,7 +2425,6 @@ group SCCPFunctions
   // ITU
 
   function ConvertASPAddressToEncodedAddress_itu( in SCCP_PAR_Address pl_ASPAddress)
-    runs on SCCP_CT
     return SCCP_param_CPartyAddressEnc
   {
 
@@ -2764,7 +2763,7 @@ group SCCPFunctions
   // according to ITU
   //******************************************************************
   function ConvertPDUEncodedAddressToASPAddress_itu( in SCCP_param_CPartyAddressEnc pl_PDUAddress)
-    runs on SCCP_CT return SCCP_PAR_Address
+    return SCCP_PAR_Address
   {
     var SCCP_PAR_Address  vl_ASPAddress;
     var SCCP_ASPfield_GlobalTitle tmpGT; // the same for itu, ansi and ttc
@@ -2848,7 +2847,7 @@ group SCCPFunctions
   //******************************************************************
 
   function ConvertPDUEncodedAddressToASPAddress_ansi( in SCCP_param_CPartyAddressEnc pl_PDUAddress)
-    runs on SCCP_CT return SCCP_PAR_Address
+    return SCCP_PAR_Address
   {
     var SCCP_PAR_Address  vl_ASPAddress;
     var SCCP_ASPfield_GlobalTitle tmpGT; // the same for itu, ansi and ttc
@@ -2916,7 +2915,7 @@ group SCCPFunctions
   // according to ttc
   //******************************************************************
   function ConvertPDUEncodedAddressToASPAddress_ttc( in SCCP_param_CPartyAddressEnc pl_PDUAddress)
-    runs on SCCP_CT return SCCP_PAR_Address
+    return SCCP_PAR_Address
   {
     var SCCP_PAR_Address  vl_ASPAddress;
     var SCCP_ASPfield_GlobalTitle tmpGT; // the same for itu, ansi and ttc
@@ -2999,7 +2998,7 @@ group SCCPFunctions
   // according to mpt
   //******************************************************************
   function ConvertPDUEncodedAddressToASPAddress_mpt( in SCCP_param_CPartyAddressEnc pl_PDUAddress)
-    runs on SCCP_CT return SCCP_PAR_Address
+    return SCCP_PAR_Address
   {
     var SCCP_PAR_Address  vl_ASPAddress;
     var SCCP_ASPfield_GlobalTitle tmpGT; // the same for itu, ansi and ttc
