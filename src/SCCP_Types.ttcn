@@ -143,6 +143,15 @@ external function dec_PDU_SCCP_Address_mpt( in octetstring o) return SCCP_param_
          extension "decode(RAW)"
        };
 
+external function enc_PDU_SCMG_message( in PDU_SCMG_message pdu) return octetstring
+  with { extension "prototype(convert)"
+         extension "encode(RAW)"
+       };
+external function dec_PDU_SCMG_message( in octetstring o) return PDU_SCMG_message
+  with { extension "prototype(convert)"
+         extension "decode(RAW)"
+       };
+
 group Types
 {
 	group FieldDefinitions
