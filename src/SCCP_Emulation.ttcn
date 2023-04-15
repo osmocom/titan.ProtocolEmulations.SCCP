@@ -1961,7 +1961,8 @@ group SCCPFunctions
     var integer vl_j;
     for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
     {
-      if (ConnectionTable[vl_j].localReference==pl_LocRef)
+      if (ConnectionTable[vl_j].state!=idle
+	  and ConnectionTable[vl_j].localReference==pl_LocRef)
       {
         return true;
       }
@@ -1978,7 +1979,8 @@ group SCCPFunctions
 
     for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
     {
-      if (ConnectionTable[vl_j].remoteReference==pl_LocRef)
+      if (ConnectionTable[vl_j].state!=idle
+	  and ConnectionTable[vl_j].remoteReference==pl_LocRef)
       {
         return true;
       }
@@ -2012,7 +2014,8 @@ group SCCPFunctions
     for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
     {
 
-      if (ConnectionTable[vl_j].localReference==pl_LocRef)
+      if (ConnectionTable[vl_j].state!=idle
+	  and ConnectionTable[vl_j].localReference==pl_LocRef)
       {
         log("Session index based on local reference:",vl_j);
         return vl_j;
@@ -2031,7 +2034,8 @@ group SCCPFunctions
     var integer vl_j;
     for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
     {
-      if (ConnectionTable[vl_j].remoteReference==pl_LocRef)
+      if (ConnectionTable[vl_j].state!=idle
+	  and ConnectionTable[vl_j].remoteReference==pl_LocRef)
       {
         log("Session index based on remote reference:",vl_j);
         return vl_j;
