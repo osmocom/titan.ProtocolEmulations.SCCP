@@ -1249,9 +1249,13 @@ group PDUDefinitions
     SCCP_param_EndOfOptionalParams       eop   optional
    }
    with { variant (pointer1) "POINTERTO(calledPAddress)";
+          variant (pointer1) "PTROFFSET(8)";
           variant (pointer2) "POINTERTO(callingPAddress)";
+          variant (pointer2) "PTROFFSET(8)";
           variant (pointer3) "POINTERTO(longData)";
+          variant (pointer3) "PTROFFSET(8)";
           variant (pointer4) "POINTERTO(optionalPart)";
+          variant (pointer4) "PTROFFSET(8)";
           variant "TAG (eop,paramName=con_SCCP_eop) "
         }
 
@@ -1282,9 +1286,13 @@ group PDUDefinitions
     SCCP_param_EndOfOptionalParams       eop   optional
   }
   with {  variant (pointer1) "POINTERTO(calledPAddress)";
+          variant (pointer1) "PTROFFSET(8)";
           variant (pointer2) "POINTERTO(callingPAddress)";
+          variant (pointer2) "PTROFFSET(8)";
           variant (pointer3) "POINTERTO(longData)";
+          variant (pointer3) "PTROFFSET(8)";
           variant (pointer4) "POINTERTO(optionalPart)";
+          variant (pointer4) "PTROFFSET(8)";
           variant "TAG (eop,paramName=con_SCCP_eop) "
        }
 
