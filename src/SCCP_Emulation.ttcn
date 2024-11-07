@@ -1949,7 +1949,7 @@ group SCCPFunctions
          return vl_j;
        }
     }
-
+    log("ERROR: Unable to find idle individual index, ConnectionTable full, length ", sizeof(ConnectionTable));
     return -1;
 
   }//CheckIdleIndividuals
