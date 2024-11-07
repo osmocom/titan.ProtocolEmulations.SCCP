@@ -381,7 +381,7 @@ const integer cg_Mapping_ResCause_Reason[12]:= {
 //mapping ASP_SCCP_N_DISCONNECT_req-> RSR:
 //
 
-const integer cg_TimerArraySize := 16;
+const integer cg_TimerArraySize := 160;
 
 }//endgroup SCCPConstants
 
@@ -1131,15 +1131,15 @@ type component SCCP_CT
   //***************************************************************
   // Connection Oriented Signalling:
   // StateTransition-> ConnectionData;
-  var ConnectionData ConnectionTable[16]; //16 connections 0 to 15
+  var ConnectionData ConnectionTable[160]; //16 connections 0 to 15
   var integer   v_session; // actual conn. oriented session index
 
   // Connectioenless Signalling:
   //== sending ==
-  var OCT3  segmLocRefTable[16];
+  var OCT3  segmLocRefTable[160];
   var integer v_segmLocRefIndex; // last index in segmLocRefTable, cyclical incremented
   //==receiving==
-  var ClessRcvBuff ClessRcvBuffTable[16];
+  var ClessRcvBuff ClessRcvBuffTable[160];
 
   var integer    v_reference; // not used ???
 
