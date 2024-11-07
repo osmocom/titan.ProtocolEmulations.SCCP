@@ -1527,7 +1527,7 @@ group SCCPFunctions
     log("v_sccp_pdu_maxlen:",v_sccp_pdu_maxlen);
     v_sccp_data_maxlen := v_sccp_pdu_maxlen-7; // dt1 payload // -7: msg_type+locref+ptr+len
 
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
       ConnectionTable[vl_j].localReference :='000000'O;
       ConnectionTable[vl_j].remoteReference:='000000'O;
@@ -1941,7 +1941,7 @@ group SCCPFunctions
   //******************************************************************
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
        if (ConnectionTable[vl_j].state==idle)
        {
@@ -1959,7 +1959,7 @@ group SCCPFunctions
   //******************************************************************
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
       if (ConnectionTable[vl_j].state!=idle
 	  and ConnectionTable[vl_j].localReference==pl_LocRef)
@@ -1977,7 +1977,7 @@ group SCCPFunctions
   {
     var integer vl_j;
 
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
       if (ConnectionTable[vl_j].state!=idle
 	  and ConnectionTable[vl_j].remoteReference==pl_LocRef)
@@ -1994,7 +1994,7 @@ group SCCPFunctions
   //******************************************************************
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
       if (ConnectionTable[vl_j].connectionId==pl_ConnId)
       {
@@ -2011,7 +2011,7 @@ group SCCPFunctions
   //******************************************************************
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
 
       if (ConnectionTable[vl_j].state!=idle
@@ -2032,7 +2032,7 @@ group SCCPFunctions
   //******************************************************************
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
       if (ConnectionTable[vl_j].state!=idle
 	  and ConnectionTable[vl_j].remoteReference==pl_LocRef)
@@ -2051,7 +2051,7 @@ group SCCPFunctions
   //******************************************************************
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
       if (ConnectionTable[vl_j].connectionId==pl_ConnId)
       {
@@ -2091,7 +2091,7 @@ group SCCPFunctions
   runs on SCCP_CT return integer
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ConnectionTable);vl_j:=vl_j+1)
     {
       if( segmLocRefTable[vl_j] == pl_segmLocRef ) { return vl_j;}
     }
@@ -2117,7 +2117,7 @@ group SCCPFunctions
   runs on SCCP_CT return OCT3
   {
     var OCT3 vl_segmLocRef;
-    v_segmLocRefIndex := (v_segmLocRefIndex +1) mod 16;
+    v_segmLocRefIndex := (v_segmLocRefIndex +1) mod sizeof(segmLocRefTable);
     do
     {
       vl_segmLocRef := int2oct(float2int( rnd() *tsp_maxLocalReference), 3 );
@@ -2148,7 +2148,7 @@ group SCCPFunctions
   runs on SCCP_CT return integer
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ClessRcvBuffTable);vl_j:=vl_j+1)
     {
       if( ClessRcvBuffTable[vl_j].segmRemoteRef == pl_segmRemRef )
       { return vl_j;}
@@ -2163,7 +2163,7 @@ group SCCPFunctions
   runs on SCCP_CT return integer
   {
     var integer vl_j;
-    for (vl_j:=0;vl_j<16;vl_j:=vl_j+1)
+    for (vl_j:=0;vl_j<sizeof(ClessRcvBuffTable);vl_j:=vl_j+1)
     {
       if( ClessRcvBuffTable[vl_j].state == segmLocRef_idle ) { return vl_j;}
     }
