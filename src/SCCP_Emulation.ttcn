@@ -1158,17 +1158,17 @@ type component SCCP_CT
   var integer     v_RoutingLabelLen; //in bytes
   var integer     v_sccp_data_maxlen; // dt1 payload length upper limit
   var integer     v_sccp_pdu_maxlen;  // SIF len -routing label len
-  
+
   var Timer_Snapshot v_T_conn_est;
   var Timer_Snapshot v_T_ias;
   var Timer_Snapshot v_T_iar;
-  var Timer_Snapshot v_T_rel;  
-  var Timer_Snapshot v_T_repeat_rel;  
-  var Timer_Snapshot v_T_int;  
-  var Timer_Snapshot v_T_reset;    
-  var Timer_Snapshot v_T_internal_reset;    
-  var Timer_Snapshot v_T_guard;  
-  //var Timer_Snapshot v_T_T_guard;    
+  var Timer_Snapshot v_T_rel;
+  var Timer_Snapshot v_T_repeat_rel;
+  var Timer_Snapshot v_T_int;
+  var Timer_Snapshot v_T_reset;
+  var Timer_Snapshot v_T_internal_reset;
+  var Timer_Snapshot v_T_guard;
+  //var Timer_Snapshot v_T_T_guard;
   //***************************************************************
 
   port SCCPasp_SP_PT   SCCP_SP_PORT;//port type defined in SCCP_ASPs
@@ -1239,7 +1239,7 @@ type component SCCP_CT
     tspc_timer_T_guard,tspc_timer_T_guard,
     tspc_timer_T_guard,tspc_timer_T_guard,
     tspc_timer_T_guard,tspc_timer_T_guard };
-*/    
+*/
 
   timer T_reset[cg_TimerArraySize]:= { tspc_timer_T_reset,tspc_timer_T_reset,
     tspc_timer_T_reset,tspc_timer_T_reset,
@@ -1276,7 +1276,7 @@ type component SCCP_CT
 group SCCPFunctions
 {//startgroup SCCPFunctions
   //******************************************************************
-  function f_StartTimer(TimerIdentifierType pl_TimerIdentifier,integer pl_TimerIndex,float pl_duration := -1.0) runs on SCCP_CT 
+  function f_StartTimer(TimerIdentifierType pl_TimerIdentifier,integer pl_TimerIndex,float pl_duration := -1.0) runs on SCCP_CT
   //******************************************************************
   {
   select (pl_TimerIdentifier)
@@ -1285,104 +1285,104 @@ group SCCPFunctions
        {
          if(pl_duration < 0.0){
            T_conn_est[pl_TimerIndex].start;
-           v_T_conn_est[pl_TimerIndex] := true;           
+           v_T_conn_est[pl_TimerIndex] := true;
            }
          else{
-           T_conn_est[pl_TimerIndex].start(pl_duration);   
-           v_T_conn_est[pl_TimerIndex] := true;                         
-         }            
+           T_conn_est[pl_TimerIndex].start(pl_duration);
+           v_T_conn_est[pl_TimerIndex] := true;
+         }
        }
       case(ias)
        {
-        if(pl_duration < 0.0){             
+        if(pl_duration < 0.0){
           T_ias[pl_TimerIndex].start;
           v_T_ias[pl_TimerIndex] := true;
           }
-        else{   
+        else{
           T_ias[pl_TimerIndex].start(pl_duration);
-          v_T_ias[pl_TimerIndex] := true;          
-         }         
-       }          
-      case(iar)
-       {  
-        if(pl_duration  < 0.0){                  
-          T_iar[pl_TimerIndex].start;
-          v_T_iar[pl_TimerIndex] := true; 
+          v_T_ias[pl_TimerIndex] := true;
          }
-        else{  
+       }
+      case(iar)
+       {
+        if(pl_duration  < 0.0){
+          T_iar[pl_TimerIndex].start;
+          v_T_iar[pl_TimerIndex] := true;
+         }
+        else{
           T_iar[pl_TimerIndex].start(pl_duration);
-          v_T_iar[pl_TimerIndex] := true;                    
-         } 
-       }               
-      case(rel) 
-       {  
-        if(pl_duration  < 0.0){                         
+          v_T_iar[pl_TimerIndex] := true;
+         }
+       }
+      case(rel)
+       {
+        if(pl_duration  < 0.0){
           T_rel[pl_TimerIndex].start;
-          v_T_rel[pl_TimerIndex] := true;  
+          v_T_rel[pl_TimerIndex] := true;
           }
-        else{  
+        else{
           T_rel[pl_TimerIndex].start(pl_duration);
-          v_T_rel[pl_TimerIndex] := true;                      
-        }              
-       }          
+          v_T_rel[pl_TimerIndex] := true;
+        }
+       }
       case(repeat_rel)
-       {  
-        if(pl_duration  < 0.0){                
+       {
+        if(pl_duration  < 0.0){
           T_repeat_rel[pl_TimerIndex].start;
-          v_T_repeat_rel[pl_TimerIndex] := true;   
-        }  
-        else{            
+          v_T_repeat_rel[pl_TimerIndex] := true;
+        }
+        else{
           T_repeat_rel[pl_TimerIndex].start(pl_duration);
-          v_T_repeat_rel[pl_TimerIndex] := true;                     
-        }   
-       }            
-      case(int)  
-       { 
-        if(pl_duration  < 0.0){                
+          v_T_repeat_rel[pl_TimerIndex] := true;
+        }
+       }
+      case(int)
+       {
+        if(pl_duration  < 0.0){
           T_int[pl_TimerIndex].start;
           v_T_int[pl_TimerIndex] := true;
         }
-        else{    
+        else{
           T_int[pl_TimerIndex].start(pl_duration);
-          v_T_int[pl_TimerIndex] := true;        
-         }    
-        }            
+          v_T_int[pl_TimerIndex] := true;
+         }
+        }
       case(reset)
-       { 
-        if(pl_duration  < 0.0){                   
+       {
+        if(pl_duration  < 0.0){
           T_reset[pl_TimerIndex].start;
-          v_T_reset[pl_TimerIndex] := true; 
+          v_T_reset[pl_TimerIndex] := true;
         }
-        else{ 
+        else{
           T_reset[pl_TimerIndex].start(pl_duration);
-          v_T_reset[pl_TimerIndex] := true;         
-        }                      
-       }            
-      case(internal_reset) 
-       { 
-        if(pl_duration  < 0.0){                    
+          v_T_reset[pl_TimerIndex] := true;
+        }
+       }
+      case(internal_reset)
+       {
+        if(pl_duration  < 0.0){
           T_internal_reset[pl_TimerIndex].start;
-          v_T_internal_reset[pl_TimerIndex] := true;  
+          v_T_internal_reset[pl_TimerIndex] := true;
         }
-        else{ 
+        else{
           T_internal_reset[pl_TimerIndex].start(pl_duration);
-          v_T_internal_reset[pl_TimerIndex] := true;                 
+          v_T_internal_reset[pl_TimerIndex] := true;
         }
-       }                 
+       }
       case(t_guard)
        {
-        if(pl_duration  < 0.0){                     
+        if(pl_duration  < 0.0){
           T_guard[pl_TimerIndex].start;
-          v_T_guard[pl_TimerIndex] := true;  
-        }  
+          v_T_guard[pl_TimerIndex] := true;
+        }
         else{
           T_guard[pl_TimerIndex].start(pl_duration);
-          v_T_guard[pl_TimerIndex] := true;                      
-        }  
-       }                       
+          v_T_guard[pl_TimerIndex] := true;
+        }
+       }
       case else
-     {log("Warning: Incorrect Timer!")}              
-    }      
+     {log("Warning: Incorrect Timer!")}
+    }
   }
   //******************************************************************
   function f_StopTimer(TimerIdentifierType pl_TimerIdentifier,integer pl_TimerIndex) runs on SCCP_CT
@@ -1396,56 +1396,56 @@ group SCCPFunctions
           v_T_conn_est[pl_TimerIndex] := false;
        }
       case(ias)
-       {      
+       {
           T_ias[pl_TimerIndex].stop;
           v_T_ias[pl_TimerIndex] := false;
-       }          
+       }
       case(iar)
-       {      
+       {
           T_iar[pl_TimerIndex].stop;
-          v_T_iar[pl_TimerIndex] := false; 
-       }               
-      case(rel) 
-       {        
+          v_T_iar[pl_TimerIndex] := false;
+       }
+      case(rel)
+       {
           T_rel[pl_TimerIndex].stop;
-          v_T_rel[pl_TimerIndex] := false;    
-       }          
+          v_T_rel[pl_TimerIndex] := false;
+       }
       case(repeat_rel)
-       {      
+       {
           T_repeat_rel[pl_TimerIndex].stop;
-          v_T_repeat_rel[pl_TimerIndex] := false;   
-        }            
-      case(int)  
-       {       
+          v_T_repeat_rel[pl_TimerIndex] := false;
+        }
+      case(int)
+       {
           T_int[pl_TimerIndex].stop;
-          v_T_int[pl_TimerIndex] := false;   
-        }            
+          v_T_int[pl_TimerIndex] := false;
+        }
       case(reset)
-       {      
+       {
           T_reset[pl_TimerIndex].stop;
-          v_T_reset[pl_TimerIndex] := false;  
-       }            
-      case(internal_reset) 
-       {       
+          v_T_reset[pl_TimerIndex] := false;
+       }
+      case(internal_reset)
+       {
           T_internal_reset[pl_TimerIndex].stop;
-          v_T_internal_reset[pl_TimerIndex] := false;  
-       }                 
+          v_T_internal_reset[pl_TimerIndex] := false;
+       }
       case(t_guard)
-       {        
+       {
           T_guard[pl_TimerIndex].stop;
-          v_T_guard[pl_TimerIndex] := false;  
-       }                  
+          v_T_guard[pl_TimerIndex] := false;
+       }
       case else
-     {log("Warning: Incorrect Timer!")}              
-    }      
+     {log("Warning: Incorrect Timer!")}
+    }
   }
-  
-  //******************************************************************  
+
+  //******************************************************************
   function f_initialize_timer_states() runs on SCCP_CT
-  //******************************************************************  
-  {  
+  //******************************************************************
+  {
     var integer i;
-    for (i:=0; i<cg_TimerArraySize;i:=i+1) {  
+    for (i:=0; i<cg_TimerArraySize;i:=i+1) {
       v_T_conn_est[i] := false;
       v_T_ias[i] := false;
       v_T_iar[i] := false;
@@ -1454,7 +1454,7 @@ group SCCPFunctions
       v_T_int[i] := false;
       v_T_reset[i] := false;
       v_T_internal_reset[i] := false;
-      v_T_guard[i] :=  false;      
+      v_T_guard[i] :=  false;
     }
   }
 
@@ -4826,12 +4826,12 @@ group SCCPFunctions
       {
         vl_index:=get_ClessRcvBuffIndex( vl_segmRemoteRef );
       };
-      if (vl_index == -1) 
-      { 
+      if (vl_index == -1)
+      {
         log("Buffer allocation failed, message ignored.");
-        return; 
+        return;
       }
-        
+
       store_segmData(vl_index,pl_PDU_SCCP_ExtUnitdata);
       if( pl_PDU_SCCP_ExtUnitdata.optionalPart.segmentation.remainingSegment == '0000'B )
       {
@@ -5501,10 +5501,10 @@ function ScanEvents()  runs on SCCP_CT
   var        ASP_SCCP_N_UNITDATA_req    vl_N_UNITDATA_req;
   var        ASP_SCCP_N_UNITDATA_ind    vl_N_UNITDATA_ind;
   var        ASP_SCCP_N_NOTICE_ind      vl_N_NOTICE_ind;
-  
+
   var integer i;
   //this function  scans the MTP3 and user port for incoming messages and checks timers for timeout
-  
+
   f_initialize_timer_states();
 
   while (true)
@@ -5520,126 +5520,126 @@ function ScanEvents()  runs on SCCP_CT
         //Unitdata received at destination node
         //******************************************************************
         if (ischosen(vl_PDU_SCCP.unitdata))
-        { 
+        {
     //      vl_PDU_SCCP.unitdata.pointer1 :=3;
     //      vl_PDU_SCCP.unitdata.pointer2 :=0;
     //      vl_PDU_SCCP.unitdata.pointer3 :=0;
-          processing_PDU_SCCP_Unitdata( vl_PDU_SCCP.unitdata ); 
-        } 
+          processing_PDU_SCCP_Unitdata( vl_PDU_SCCP.unitdata );
+        }
 
         //******************************************************************
         //Data received at destination node
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.dataform1))
-        { 
+        {
     //      vl_PDU_SCCP.dataform1.pointer1 :=1;
-          processing_PDU_SCCP_DataForm1( vl_PDU_SCCP.dataform1 ); 
-        } 
+          processing_PDU_SCCP_DataForm1( vl_PDU_SCCP.dataform1 );
+        }
 
         //******************************************************************
         //Extended unitdata received at destination node
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.extudata))
-        { 
+        {
     //      vl_PDU_SCCP.extudata.pointer1 :=0;
     //      vl_PDU_SCCP.extudata.pointer2 :=0;
     //      vl_PDU_SCCP.extudata.pointer3 :=0;
     //      vl_PDU_SCCP.extudata.pointer4 :=0;
-          processing_PDU_SCCP_ExtUnitdata( vl_PDU_SCCP.extudata ); 
-        } 
+          processing_PDU_SCCP_ExtUnitdata( vl_PDU_SCCP.extudata );
+        }
 
         //******************************************************************
         //Connection request received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.connrequest))
-        { 
+        {
     //      vl_PDU_SCCP.connrequest.pointer1 :=2;
     //      vl_PDU_SCCP.connrequest.pointer2 :=0;
-          processing_PDU_SCCP_ConnectionRequest( vl_PDU_SCCP.connrequest ); 
-        } 
+          processing_PDU_SCCP_ConnectionRequest( vl_PDU_SCCP.connrequest );
+        }
 
         //******************************************************************
         //Connection confirm received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.connconfirm))
-        { 
+        {
     //      vl_PDU_SCCP.connconfirm.pointer1 :=1;
-          processing_PDU_SCCP_ConnectionConfirm( vl_PDU_SCCP.connconfirm ); 
-        } 
+          processing_PDU_SCCP_ConnectionConfirm( vl_PDU_SCCP.connconfirm );
+        }
 
         //******************************************************************
         //Released received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.released))
-        { 
+        {
     //      vl_PDU_SCCP.released.pointer1 :=1;
-          processing_PDU_SCCP_Released( vl_PDU_SCCP.released ); 
-        } 
+          processing_PDU_SCCP_Released( vl_PDU_SCCP.released );
+        }
 
         //******************************************************************
         //Release complete received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.relcomp))
-        { 
-          processing_PDU_SCCP_ReleaseComplete( vl_PDU_SCCP.relcomp ); 
-        } 
+        {
+          processing_PDU_SCCP_ReleaseComplete( vl_PDU_SCCP.relcomp );
+        }
 
         //******************************************************************
         //Unitdata service  received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.udataserv))
-        { 
+        {
     //      vl_PDU_SCCP.udataserv.pointer1 :=3;
     //      vl_PDU_SCCP.udataserv.pointer2 :=0;
     //      vl_PDU_SCCP.udataserv.pointer3 :=0;
-          processing_PDU_SCCP_UnitdataService( vl_PDU_SCCP.udataserv ); 
-        } 
+          processing_PDU_SCCP_UnitdataService( vl_PDU_SCCP.udataserv );
+        }
 
         //******************************************************************
         //PDU_Error  received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.pduerror))
-        { 
-          processing_PDU_SCCP_ProtDataUnitError( vl_PDU_SCCP.pduerror ); 
-        } 
+        {
+          processing_PDU_SCCP_ProtDataUnitError( vl_PDU_SCCP.pduerror );
+        }
 
         //******************************************************************
         //Inactivity test received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.inacttest))
-        { 
-          processing_PDU_SCCP_InactivityTest( vl_PDU_SCCP.inacttest ); 
-        } 
+        {
+          processing_PDU_SCCP_InactivityTest( vl_PDU_SCCP.inacttest );
+        }
 
         //******************************************************************
         //Reset request  received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.resetreq))
-        { 
-          processing_PDU_SCCP_ResetRequest( vl_PDU_SCCP.resetreq ); 
-        } 
+        {
+          processing_PDU_SCCP_ResetRequest( vl_PDU_SCCP.resetreq );
+        }
 
         //******************************************************************
         //Reset confirm  received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.resconf))
-        { 
-          processing_PDU_SCCP_ResetConfirm( vl_PDU_SCCP.resconf ); 
-        } 
+        {
+          processing_PDU_SCCP_ResetConfirm( vl_PDU_SCCP.resconf );
+        }
 
         //******************************************************************
         //Connection refused received
         //******************************************************************
         else if (ischosen(vl_PDU_SCCP.connrefused))
-        { 
+        {
     //      vl_PDU_SCCP.connrefused.pointer1 :=1;
-          processing_PDU_SCCP_ConnectionRefused( vl_PDU_SCCP.connrefused ); 
+          processing_PDU_SCCP_ConnectionRefused( vl_PDU_SCCP.connrefused );
         }
         else
         { log ("Unsupported message received and discarded"); }
       }
 
-    []MTP3_SCCP_PORT.receive 
+    []MTP3_SCCP_PORT.receive
       { log("Unsupported or unrecognized message discarded after reception") }
 
     //******************************************************************
@@ -5648,7 +5648,7 @@ function ScanEvents()  runs on SCCP_CT
     //******************************************************************
     //******************************************************************
 
-    [] SCCP_SP_PORT.check  
+    [] SCCP_SP_PORT.check
     {//start second alternative
 
       alt { //startalt1-subalternatives vill follow
@@ -5706,7 +5706,7 @@ function ScanEvents()  runs on SCCP_CT
 
         //******************************************************************
         //connection timer expired
-        //******************************************************************   
+        //******************************************************************
         [v_T_conn_est[0]]        T_conn_est[0].timeout         {Conn_Timer_Expired(0);
                                                                 v_T_conn_est[0] := false;}
         [v_T_conn_est[1]]        T_conn_est[1].timeout         {Conn_Timer_Expired(1);
@@ -5739,11 +5739,11 @@ function ScanEvents()  runs on SCCP_CT
                                                                 v_T_conn_est[14] := false;}
         [v_T_conn_est[15]]        T_conn_est[15].timeout         {Conn_Timer_Expired(15);
                                                                 v_T_conn_est[15] := false;}
-        
+
         //******************************************************************
         //send inactivity timer expired
-        //******************************************************************        
-        
+        //******************************************************************
+
         [v_T_ias[0]]             T_ias[0].timeout              {SendInactivity_Timer_Expired(0);
                                                                 v_T_ias[0] := false;}
         [v_T_ias[1]]             T_ias[1].timeout              {SendInactivity_Timer_Expired(1);
@@ -5776,10 +5776,10 @@ function ScanEvents()  runs on SCCP_CT
                                                                 v_T_ias[14] := false;}
         [v_T_ias[15]]             T_ias[15].timeout              {SendInactivity_Timer_Expired(15);
                                                                 v_T_ias[15] := false;}
-        
+
         //******************************************************************
         //receive inactivity timer expired
-        //******************************************************************        
+        //******************************************************************
         [v_T_iar[0]]             T_iar[0].timeout              {ReceiveInactivity_Timer_Expired(0);
                                                                 v_T_iar[0] := false;}
         [v_T_iar[1]]             T_iar[1].timeout              {ReceiveInactivity_Timer_Expired(1);
@@ -5812,10 +5812,10 @@ function ScanEvents()  runs on SCCP_CT
                                                                 v_T_iar[14] := false;}
         [v_T_iar[15]]             T_iar[15].timeout              {ReceiveInactivity_Timer_Expired(15);
                                                                 v_T_iar[15] := false;}
-         
+
         //******************************************************************
         //release timer expired
-        //******************************************************************        
+        //******************************************************************
         [v_T_rel[0]]             T_rel[0].timeout              {Release_Timer_Expired(0);
                                                                 v_T_rel[0] := false;}
         [v_T_rel[1]]             T_rel[1].timeout              {Release_Timer_Expired(1);
@@ -5848,11 +5848,11 @@ function ScanEvents()  runs on SCCP_CT
                                                                 v_T_rel[14] := false;}
         [v_T_rel[15]]             T_rel[15].timeout              {Release_Timer_Expired(15);
                                                                 v_T_rel[15] := false;}
-                
+
         //******************************************************************
         //repeat release timer expired
-        //******************************************************************        
-        
+        //******************************************************************
+
         [v_T_repeat_rel[0]]             T_repeat_rel[0].timeout              {RepeatRelease_Timer_Expired(0);
                                                                 v_T_repeat_rel[0] := false;}
         [v_T_repeat_rel[1]]             T_repeat_rel[1].timeout              {RepeatRelease_Timer_Expired(1);
@@ -5885,10 +5885,10 @@ function ScanEvents()  runs on SCCP_CT
                                                                 v_T_repeat_rel[14] := false;}
         [v_T_repeat_rel[15]]             T_repeat_rel[15].timeout              {RepeatRelease_Timer_Expired(15);
                                                                 v_T_repeat_rel[15] := false;}
-        
+
         //******************************************************************
         //interval timer expired
-        //******************************************************************        
+        //******************************************************************
         [v_T_int[0]]             T_int[0].timeout              {Interval_Timer_Expired(0);
                                                                 v_T_int[0] := false;}
         [v_T_int[1]]             T_int[1].timeout              {Interval_Timer_Expired(1);
@@ -5921,10 +5921,10 @@ function ScanEvents()  runs on SCCP_CT
                                                                 v_T_int[14] := false;}
         [v_T_int[15]]             T_int[15].timeout              {Interval_Timer_Expired(15);
                                                                 v_T_int[15] := false;}
-        
+
         //******************************************************************
         //reset timer expired
-        //******************************************************************                       
+        //******************************************************************
         [v_T_reset[0]]             T_reset[0].timeout              {Reset_Timer_Expired(0);
                                                                 v_T_reset[0] := false;}
         [v_T_reset[1]]             T_reset[1].timeout              {Reset_Timer_Expired(1);
@@ -5957,10 +5957,10 @@ function ScanEvents()  runs on SCCP_CT
                                                                 v_T_reset[14] := false;}
         [v_T_reset[15]]             T_reset[15].timeout              {Reset_Timer_Expired(15);
                                                                 v_T_reset[15] := false;}
-        
+
         //******************************************************************
         //internal_reset timer expired-sending internal signals!
-        //******************************************************************                        
+        //******************************************************************
        [v_T_internal_reset[0]]             T_internal_reset[0].timeout              {InternalResetTimer_Expired(0);
                                                                 v_T_internal_reset[0] := false;}
         [v_T_internal_reset[1]]             T_internal_reset[1].timeout              {InternalResetTimer_Expired(1);
@@ -5993,10 +5993,10 @@ function ScanEvents()  runs on SCCP_CT
                                                                 v_T_internal_reset[14] := false;}
         [v_T_internal_reset[15]]             T_internal_reset[15].timeout              {InternalResetTimer_Expired(15);
                                                                 v_T_internal_reset[15] := false;}
-        
+
        //******************************************************************
        //guard timer expired - no answer to ASP_SCCP_N_CONNECT_ind received
-       //******************************************************************                        
+       //******************************************************************
         [v_T_guard[0]]             T_guard[0].timeout              {GuardTimer_Expired(0);
                                                                 v_T_guard[0] := false;}
         [v_T_guard[1]]             T_guard[1].timeout              {GuardTimer_Expired(1);
