@@ -1176,99 +1176,25 @@ type component SCCP_CT
 
   //component timers
 
-  timer T_conn_est[cg_TimerArraySize]:= { tspc_timer_T_conn_est,tspc_timer_T_conn_est,
-    tspc_timer_T_conn_est,tspc_timer_T_conn_est,
-    tspc_timer_T_conn_est,tspc_timer_T_conn_est,
-    tspc_timer_T_conn_est,tspc_timer_T_conn_est,
-    tspc_timer_T_conn_est,tspc_timer_T_conn_est,
-    tspc_timer_T_conn_est,tspc_timer_T_conn_est,
-    tspc_timer_T_conn_est,tspc_timer_T_conn_est,
-    tspc_timer_T_conn_est,tspc_timer_T_conn_est };
+  timer T_conn_est[cg_TimerArraySize];
 
-  timer T_ias[cg_TimerArraySize]:=   { tspc_timer_T_ias,tspc_timer_T_ias,
-    tspc_timer_T_ias,tspc_timer_T_ias,
-    tspc_timer_T_ias,tspc_timer_T_ias,
-    tspc_timer_T_ias,tspc_timer_T_ias,
-    tspc_timer_T_ias,tspc_timer_T_ias,
-    tspc_timer_T_ias,tspc_timer_T_ias,
-    tspc_timer_T_ias,tspc_timer_T_ias,
-    tspc_timer_T_ias,tspc_timer_T_ias };
+  timer T_ias[cg_TimerArraySize];
 
-  timer T_iar[cg_TimerArraySize]:= { tspc_timer_T_iar,tspc_timer_T_iar,
-    tspc_timer_T_iar,tspc_timer_T_iar,
-    tspc_timer_T_iar,tspc_timer_T_iar,
-    tspc_timer_T_iar,tspc_timer_T_iar,
-    tspc_timer_T_iar,tspc_timer_T_iar,
-    tspc_timer_T_iar,tspc_timer_T_iar,
-    tspc_timer_T_iar,tspc_timer_T_iar,
-    tspc_timer_T_iar,tspc_timer_T_iar };
+  timer T_iar[cg_TimerArraySize];
 
-  timer T_rel[cg_TimerArraySize]:= { tspc_timer_T_rel,tspc_timer_T_rel,
-    tspc_timer_T_rel,tspc_timer_T_rel,
-    tspc_timer_T_rel,tspc_timer_T_rel,
-    tspc_timer_T_rel,tspc_timer_T_rel,
-    tspc_timer_T_rel,tspc_timer_T_rel,
-    tspc_timer_T_rel,tspc_timer_T_rel,
-    tspc_timer_T_rel,tspc_timer_T_rel,
-    tspc_timer_T_rel,tspc_timer_T_rel };
+  timer T_rel[cg_TimerArraySize];
 
-  timer T_repeat_rel[cg_TimerArraySize]:= { tspc_timer_T_repeat_rel,tspc_timer_T_repeat_rel,
-    tspc_timer_T_repeat_rel,tspc_timer_T_repeat_rel,
-    tspc_timer_T_repeat_rel,tspc_timer_T_repeat_rel,
-    tspc_timer_T_repeat_rel,tspc_timer_T_repeat_rel,
-    tspc_timer_T_repeat_rel,tspc_timer_T_repeat_rel,
-    tspc_timer_T_repeat_rel,tspc_timer_T_repeat_rel,
-    tspc_timer_T_repeat_rel,tspc_timer_T_repeat_rel,
-    tspc_timer_T_repeat_rel,tspc_timer_T_repeat_rel };
+  timer T_repeat_rel[cg_TimerArraySize];
 
-  timer T_int[cg_TimerArraySize]:= { tspc_timer_T_int,tspc_timer_T_int,
-    tspc_timer_T_int,tspc_timer_T_int,
-    tspc_timer_T_int,tspc_timer_T_int,
-    tspc_timer_T_int,tspc_timer_T_int,
-    tspc_timer_T_int,tspc_timer_T_int,
-    tspc_timer_T_int,tspc_timer_T_int,
-    tspc_timer_T_int,tspc_timer_T_int,
-    tspc_timer_T_int,tspc_timer_T_int };
+  timer T_int[cg_TimerArraySize];
 
+/*  timer T_T_guard[cg_TimerArraySize]; */
 
-/*  timer T_T_guard[cg_TimerArraySize]:= { tspc_timer_T_guard,tspc_timer_T_guard,
-    tspc_timer_T_guard,tspc_timer_T_guard,
-    tspc_timer_T_guard,tspc_timer_T_guard,
-    tspc_timer_T_guard,tspc_timer_T_guard,
-    tspc_timer_T_guard,tspc_timer_T_guard,
-    tspc_timer_T_guard,tspc_timer_T_guard,
-    tspc_timer_T_guard,tspc_timer_T_guard,
-    tspc_timer_T_guard,tspc_timer_T_guard };
-*/
+  timer T_reset[cg_TimerArraySize];
 
-  timer T_reset[cg_TimerArraySize]:= { tspc_timer_T_reset,tspc_timer_T_reset,
-    tspc_timer_T_reset,tspc_timer_T_reset,
-    tspc_timer_T_reset,tspc_timer_T_reset,
-    tspc_timer_T_reset,tspc_timer_T_reset,
-    tspc_timer_T_reset,tspc_timer_T_reset,
-    tspc_timer_T_reset,tspc_timer_T_reset,
-    tspc_timer_T_reset,tspc_timer_T_reset,
-    tspc_timer_T_reset,tspc_timer_T_reset };
+  timer T_internal_reset[cg_TimerArraySize];
 
-
-  timer T_internal_reset[cg_TimerArraySize]:= { tspc_timer_T_internal_reset,tspc_timer_T_internal_reset,
-    tspc_timer_T_internal_reset,tspc_timer_T_internal_reset,
-    tspc_timer_T_internal_reset,tspc_timer_T_internal_reset,
-    tspc_timer_T_internal_reset,tspc_timer_T_internal_reset,
-    tspc_timer_T_internal_reset,tspc_timer_T_internal_reset,
-    tspc_timer_T_internal_reset,tspc_timer_T_internal_reset,
-    tspc_timer_T_internal_reset,tspc_timer_T_internal_reset,
-    tspc_timer_T_internal_reset,tspc_timer_T_internal_reset };
-
-
-  timer T_guard[cg_TimerArraySize]:= { tspc_timer_guard,tspc_timer_guard,
-    tspc_timer_guard,tspc_timer_guard,
-    tspc_timer_guard,tspc_timer_guard,
-    tspc_timer_guard,tspc_timer_guard,
-    tspc_timer_guard,tspc_timer_guard,
-    tspc_timer_guard,tspc_timer_guard,
-    tspc_timer_guard,tspc_timer_guard,
-    tspc_timer_guard,tspc_timer_guard };
+  timer T_guard[cg_TimerArraySize];
 
 }//endcomponent  SCCP_CT
 
@@ -1284,7 +1210,7 @@ group SCCPFunctions
       case(conn_est)
        {
          if(pl_duration < 0.0){
-           T_conn_est[pl_TimerIndex].start;
+           T_conn_est[pl_TimerIndex].start(tspc_timer_T_conn_est);
            v_T_conn_est[pl_TimerIndex] := true;
            }
          else{
@@ -1295,7 +1221,7 @@ group SCCPFunctions
       case(ias)
        {
         if(pl_duration < 0.0){
-          T_ias[pl_TimerIndex].start;
+          T_ias[pl_TimerIndex].start(tspc_timer_T_ias);
           v_T_ias[pl_TimerIndex] := true;
           }
         else{
@@ -1306,7 +1232,7 @@ group SCCPFunctions
       case(iar)
        {
         if(pl_duration  < 0.0){
-          T_iar[pl_TimerIndex].start;
+          T_iar[pl_TimerIndex].start(tspc_timer_T_iar);
           v_T_iar[pl_TimerIndex] := true;
          }
         else{
@@ -1317,7 +1243,7 @@ group SCCPFunctions
       case(rel)
        {
         if(pl_duration  < 0.0){
-          T_rel[pl_TimerIndex].start;
+          T_rel[pl_TimerIndex].start(tspc_timer_T_rel);
           v_T_rel[pl_TimerIndex] := true;
           }
         else{
@@ -1328,7 +1254,7 @@ group SCCPFunctions
       case(repeat_rel)
        {
         if(pl_duration  < 0.0){
-          T_repeat_rel[pl_TimerIndex].start;
+          T_repeat_rel[pl_TimerIndex].start(tspc_timer_T_repeat_rel);
           v_T_repeat_rel[pl_TimerIndex] := true;
         }
         else{
@@ -1339,7 +1265,7 @@ group SCCPFunctions
       case(int)
        {
         if(pl_duration  < 0.0){
-          T_int[pl_TimerIndex].start;
+          T_int[pl_TimerIndex].start(tspc_timer_T_int);
           v_T_int[pl_TimerIndex] := true;
         }
         else{
@@ -1350,7 +1276,7 @@ group SCCPFunctions
       case(reset)
        {
         if(pl_duration  < 0.0){
-          T_reset[pl_TimerIndex].start;
+          T_reset[pl_TimerIndex].start(tspc_timer_T_reset);
           v_T_reset[pl_TimerIndex] := true;
         }
         else{
@@ -1361,7 +1287,7 @@ group SCCPFunctions
       case(internal_reset)
        {
         if(pl_duration  < 0.0){
-          T_internal_reset[pl_TimerIndex].start;
+          T_internal_reset[pl_TimerIndex].start(tspc_timer_T_internal_reset);
           v_T_internal_reset[pl_TimerIndex] := true;
         }
         else{
@@ -1372,7 +1298,7 @@ group SCCPFunctions
       case(t_guard)
        {
         if(pl_duration  < 0.0){
-          T_guard[pl_TimerIndex].start;
+          T_guard[pl_TimerIndex].start(tspc_timer_guard);
           v_T_guard[pl_TimerIndex] := true;
         }
         else{
